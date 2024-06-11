@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+.header {
+  background-color: rgb(0, 150, 199);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 7vh;
+}
+
+.header .title {
+  font-size: 2rem;
+}
+
+.movie {
+  width: 26vw;
+  height: 50vh;
+  padding: 10px;
+  background-color: rgb(144, 224, 239);
+  border-radius: 0.5rem;
+  place-self: center;
+}
+.movie .movie-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+.movie .movie-link .movie-img-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+.movie .movie-link .movie-img-container .movie-image {
+  width: 100%;
+  height: auto;
+}
+.movie .movie-link .movie-img-container .movie-rating {
+  font-size: 1.3rem;
+  position: absolute;
+  top: -0.5rem;
+  right: -1rem;
+  color: rgb(3, 4, 94);
+  background-color: white;
+  padding: 0.7rem;
+  border-radius: 100%;
+  border: 0.01rem solid rgb(3, 4, 94);
+}
+.movie .movie-link .movie-title {
+  font-size: 1.6rem;
+}
+
+.movie-list {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.movie-list .movie-list-movies {
+  padding: 2rem 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+body {
+  background-color: rgb(202, 240, 248);
+  font-size: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+figure,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+code,
+em,
+img,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+b,
+u,
+i,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+main,
+canvas,
+embed,
+footer,
+header,
+nav,
+section,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer,
+header,
+nav,
+section,
+main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+input {
+  -webkit-appearance: none;
+  appearance: none;
+  border-radius: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/*# sourceMappingURL=index.css.map */

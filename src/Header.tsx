@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <header>
-      <h1>Movie API</h1>
+    <header className="header">
+      <h1 className="header title">Movie API</h1>
     </header>
   );
 };

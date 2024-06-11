@@ -1,0 +1,12 @@
+@use "../abstracts/" as *;
+.header {
+  background-color: $pacific-blue;
+  color: white;
+  @include displayFlex;
+  width: 100%;
+  height: 7vh;
+}
+
+.header .title {
+  font-size: 2rem;
+}

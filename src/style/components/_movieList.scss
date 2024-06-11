@@ -1,0 +1,12 @@
+@use "../abstracts/" as *;
+.movie-list {
+  height: 100%;
+  width: 100%;
+  @include displayFlexBetweenCol;
+  .movie-list-movies {
+    padding: 2rem 0;
+    width: 100%;
+    @include diplayGrid2Cols;
+    gap: 3rem;
+  }
+}

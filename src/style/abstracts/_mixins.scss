@@ -1,0 +1,24 @@
+@mixin displayFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin displayFlexCol {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+@mixin displayFlexBetweenCol {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+@mixin diplayGrid2Cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}

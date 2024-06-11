@@ -1,0 +1,42 @@
+@use "../abstracts/" as *;
+
+.movie {
+  width: 26vw;
+  height: 50vh;
+  padding: 10px;
+  background-color: $blizzard-blue;
+  border-radius: 0.5rem;
+  place-self: center;
+
+  .movie-link {
+    @include displayFlexCol;
+    gap: 2rem;
+
+    .movie-img-container {
+      position: relative;
+      width: 100%;
+      height: auto;
+
+      .movie-image {
+        width: 100%;
+        height: auto;
+      }
+
+      .movie-rating {
+        font-size: 1.3rem;
+        position: absolute;
+        top: -0.5rem;
+        right: -1rem;
+        color: $navy;
+        background-color: white;
+        padding: 0.7rem;
+        border-radius: 100%;
+        border: 0.01rem solid $navy;
+      }
+    }
+
+    .movie-title {
+      font-size: 1.6rem;
+    }
+  }
+}
