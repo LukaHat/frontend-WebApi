@@ -18,7 +18,7 @@
   flex-direction: column;
 }
 
-@mixin diplayGrid2Cols {
+@mixin displayGrid2Cols {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }

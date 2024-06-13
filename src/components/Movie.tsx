@@ -15,14 +15,14 @@ const Movie = ({
 }) => {
   const [releaseYear, setReleaseYear] = useState<number>(0);
 
-  const getYearFromDate = (release_date: string) => {
-    setReleaseYear(Number(release_date.slice(0, 4)));
-    console.log(releaseYear);
-  };
-
   useEffect(() => {
+    const getYearFromDate = (release_date: string) => {
+      setReleaseYear(Number(release_date.slice(0, 4)));
+      console.log(releaseYear);
+    };
+
     getYearFromDate(release_date);
-  }, [release_date]);
+  }, [releaseYear, release_date]);
 
   return (
     <div className="movie-link">

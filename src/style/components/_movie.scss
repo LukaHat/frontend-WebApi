@@ -4,9 +4,14 @@
   width: 26vw;
   height: 50vh;
   padding: 10px;
-  background-color: $blizzard-blue;
+  background-color: rgb(33, 31, 31);
   border-radius: 0.5rem;
   place-self: center;
+  color: white;
+  transition: 300ms;
+  &:hover {
+    scale: 1.1;
+  }
 
   .movie-link {
     @include displayFlexCol;
@@ -25,13 +30,25 @@
       .movie-rating {
         font-size: 1.3rem;
         position: absolute;
-        top: -0.5rem;
-        right: -1rem;
+        top: -2.5rem;
+        right: -3rem;
         color: $navy;
-        background-color: white;
-        padding: 0.7rem;
+        background-color: gold;
+        padding: 2rem;
         border-radius: 100%;
         border: 0.01rem solid $navy;
+        clip-path: polygon(
+          50% 0%,
+          68% 30%,
+          98% 35%,
+          77% 56%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          23% 55%,
+          2% 35%,
+          33% 31%
+        );
       }
     }
 

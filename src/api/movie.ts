@@ -1,10 +1,10 @@
-import { getAll } from "./base";
-
-const BASE_URL = "/discover/movie?language=en-US&sort_by=popularity.desc";
+import { getAll, getById } from "./base";
 
 const getAllMovies = async (page: number) => {
   try {
-    const resp = await getAll(`${BASE_URL}&page=${page}`);
+    const resp = await getAll(
+      `/discover/movie?language=en-US&sort_by=popularity.desc&page=${page}`
+    );
     const data = resp?.data;
     console.log(data);
     return data;
@@ -13,4 +13,15 @@ const getAllMovies = async (page: number) => {
   }
 };
 
-export { getAllMovies };
+const getMovieById = async (id: number) => {
+  try {
+    const resp = await getById("/movie/", id);
+    const data = resp?.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getAllMovies, getMovieById };

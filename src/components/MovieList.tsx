@@ -8,22 +8,28 @@ export const MovieList = () => {
   const [page, setPage] = useState<number>(1);
   const [movies, setMovies] = useState<MovieInterface[]>([]);
 
-  const fetchMovieData = async (page: number) => {
-    try {
-      const resp = await getAllMovies(page);
-      console.log(resp);
-      setMovies((prevMovies) => [...prevMovies, ...resp.results]);
-      console.log(movies);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchMovieData = async (page: number) => {
+      try {
+        const resp = await getAllMovies(page);
+        console.log(resp);
+        setMovies((prevMovies) => [...prevMovies, ...resp.results]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchMovieData(page);
   }, [page]);
+
   return (
     <div className="movie-list">
+      <button
+        onClick={() => setPage((prevPage) => prevPage + 1)}
+        className="movie-list-load"
+      >
+        Load
+      </button>
       <div className="movie-list-movies">
         {movies.map((movie) => (
           <Link to={`movie/${movie.id}`} key={movie.id} className="movie">
@@ -37,7 +43,6 @@ export const MovieList = () => {
           </Link>
         ))}
       </div>
-      <button onClick={() => setPage((prevPage) => prevPage + 1)}>Load</button>
     </div>
   );
 };
