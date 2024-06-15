@@ -18,3 +18,8 @@ export interface MovieDetailInterface {
   language: string;
   productionCompanies: string[];
 }
+
+export interface GenreInterface {
+  id: number;
+  name: string;
+}

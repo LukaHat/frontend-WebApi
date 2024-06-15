@@ -14,9 +14,18 @@
     align-items: start;
     position: relative;
     width: 100%;
-
     .movie-detail-img {
-      max-width: 100%;
+      max-width: 80%;
+
+      @include respond-to(small) {
+        max-width: 100%;
+      }
+      @include respond-to(medium) {
+        max-width: 100%;
+      }
+      @include respond-to(large) {
+        max-width: 80%;
+      }
       height: auto;
     }
 
@@ -35,6 +44,37 @@
         transparent 100%
       );
       box-shadow: 0.5rem -0.3rem 1rem rgba(0, 0, 0, 0.8);
+
+      @include respond-to(small) {
+        color: white;
+        width: 100%;
+        background: black;
+        box-shadow: none;
+        position: relative;
+      }
+      @include respond-to(medium) {
+        color: white;
+        width: 100%;
+        background: black;
+        box-shadow: none;
+        position: relative;
+      }
+      @include respond-to(large) {
+        position: absolute;
+        width: 60%;
+        top: 80%;
+        height: 20%;
+        padding: 1rem;
+        font-size: 1.2rem;
+        background: transparent;
+        color: white;
+        background: linear-gradient(
+          177deg,
+          rgba(0, 0, 0, 0.7) 0%,
+          transparent 100%
+        );
+        box-shadow: 0.5rem -0.3rem 1rem rgba(0, 0, 0, 0.8);
+      }
     }
   }
   .movie-detail-more-info {

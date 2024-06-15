@@ -24,4 +24,14 @@ const getMovieById = async (id: number) => {
   }
 };
 
-export { getAllMovies, getMovieById };
+const getAllGenres = async () => {
+  try {
+    const resp = await getAll("/genre/movie/list");
+    const data = resp?.data.genres;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getAllMovies, getMovieById, getAllGenres };

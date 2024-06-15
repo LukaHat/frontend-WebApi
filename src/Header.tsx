@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
-    <header className="header">
+    <Link to="/" className="header">
       <h1 className="header title">Movie API</h1>
-    </header>
+    </Link>
   );
 };
 
