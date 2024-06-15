@@ -13,6 +13,19 @@ const getAllMovies = async (page: number) => {
   }
 };
 
+const getAllMoviesFromGenre = async (genre: number, page: number = 1) => {
+  try {
+    const resp = await getAll(
+      `/discover/movie?language=en-US&sort_by=popularity.desc&page=${page}&with_genres=${genre}`
+    );
+    const data = resp?.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const getMovieById = async (id: number) => {
   try {
     const resp = await getById("/movie/", id);
@@ -34,4 +47,4 @@ const getAllGenres = async () => {
   }
 };
 
-export { getAllMovies, getMovieById, getAllGenres };
+export { getAllMovies, getMovieById, getAllGenres, getAllMoviesFromGenre };

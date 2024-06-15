@@ -246,9 +246,11 @@ a {
 .movie-list .movie-roulette-modal-container {
   width: 100%;
   height: 100%;
-  background-color: lightblue;
+  background-color: rgba(0, 0, 0, 0.8);
   z-index: 10;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,14 +260,30 @@ a {
 .movie-list .movie-roulette-modal-container .movie-roulette-modal {
   width: 40%;
   height: 70%;
-  background-color: lightcoral;
+  background-color: black;
+  color: white;
 }
-.movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-title {
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 0.01rem solid black;
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header .movie-roulette-title {
   padding: 1rem;
   font-size: 2rem;
   width: 100%;
   height: 10%;
-  border-bottom: 0.01rem solid black;
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header .movie-roulette-close {
+  padding: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  background-color: inherit;
+  border: none;
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header .movie-roulette-close:hover {
+  cursor: pointer;
 }
 .movie-list .movie-roulette-modal-container .movie-roulette-modal .radio-input {
   width: 1rem;

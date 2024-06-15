@@ -1,5 +1,9 @@
-import { useEffect, useState } from "react";
-import { getAllGenres, getAllMovies } from "../api/movie";
+import React, { useEffect, useState } from "react";
+import {
+  getAllGenres,
+  getAllMovies,
+  getAllMoviesFromGenre,
+} from "../api/movie";
 import { GenreInterface, MovieInterface } from "../types";
 import Movie from "./Movie";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,15 +17,28 @@ export const MovieList = () => {
   const [movies, setMovies] = useState<MovieInterface[]>([]);
   const [genres, setGenres] = useState<GenreInterface[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<number>(0);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedGenre !== 0) {
-      const timer = setTimeout(() => {
-        navigate(`/movie/${selectedGenre}`);
-      }, 300);
-      return () => clearTimeout(timer);
+      const fetchMovieGenre = async () => {
+        try {
+          const randomPage: number = Math.floor(Math.random() * 500) + 1;
+          const randomMovies = await getAllMoviesFromGenre(
+            selectedGenre,
+            randomPage
+          );
+          const randomMoviesArray: MovieInterface[] = randomMovies.results;
+          const randomMoviePage: number = Math.floor(Math.random() * 20) + 1;
+          const randomId: number = randomMoviesArray[randomMoviePage].id;
+          navigate(`/movie/${randomId}`);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchMovieGenre();
     }
-  }, [selectedGenre, navigate]);
+  }, [navigate, selectedGenre]);
 
   useEffect(() => {
     const fetchMovieData = async (page: number) => {
@@ -51,6 +68,27 @@ export const MovieList = () => {
     fetchGenreData();
   }, []);
 
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isModalOpen) {
+        setIsModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, [isModalOpen]);
+
+  const handleContainerClick = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    if (e.target === e.currentTarget) {
+      setIsModalOpen(!isModalOpen);
+    }
+  };
+
   return (
     <>
       <div className="movie-list">
@@ -60,7 +98,12 @@ export const MovieList = () => {
         >
           Load
         </button>
-        <button className="movie-list-random">
+        <button
+          className="movie-list-random"
+          onClick={() => {
+            setIsModalOpen(!isModalOpen);
+          }}
+        >
           <img src={random} alt="random" />
         </button>
         <div className="movie-list-movies">
@@ -76,27 +119,40 @@ export const MovieList = () => {
             </Link>
           ))}
         </div>
-        <div className="movie-roulette-modal-container">
-          <div className="movie-roulette-modal">
-            <h2 className="movie-roulette-title">Movie Roulette</h2>
-            <legend>Select genre:</legend>
-            {genres.map((genre) => (
-              <div key={genre.id}>
-                <input
-                  type="radio"
-                  id={genre.name}
-                  name="genre"
-                  value={genre.id}
-                  className="radio-input"
-                  onChange={(e) => {
-                    setSelectedGenre(Number(e.target.value));
-                  }}
-                />
-                <label htmlFor={genre.name}>{genre.name}</label>
+        {isModalOpen && (
+          <div
+            className="movie-roulette-modal-container"
+            onClick={handleContainerClick}
+          >
+            <div className="movie-roulette-modal">
+              <div className="movie-roulette-header">
+                <h2 className="movie-roulette-title">Movie Roulette</h2>
+                <button
+                  className="movie-roulette-close"
+                  onClick={() => setIsModalOpen(!isModalOpen)}
+                >
+                  &times;
+                </button>
               </div>
-            ))}
+              <legend>Select genre:</legend>
+              {genres.map((genre) => (
+                <div key={genre.id}>
+                  <input
+                    type="radio"
+                    id={genre.name}
+                    name="genre"
+                    value={genre.id}
+                    className="radio-input"
+                    onChange={(e) => {
+                      setSelectedGenre(Number(e.target.value));
+                    }}
+                  />
+                  <label htmlFor={genre.name}>{genre.name}</label>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

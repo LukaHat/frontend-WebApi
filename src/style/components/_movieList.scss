@@ -7,22 +7,40 @@
   .movie-roulette-modal-container {
     width: 100%;
     height: 100%;
-    background-color: lightblue;
+    background-color: rgba(0, 0, 0, 0.8);
     z-index: 10;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     @include displayFlexCol;
     padding-bottom: 7%;
     .movie-roulette-modal {
       width: 40%;
       height: 70%;
-      background-color: lightcoral;
-      .movie-roulette-title {
-        padding: 1rem;
-        font-size: 2rem;
-        width: 100%;
-        height: 10%;
+      background-color: black;
+      color: white;
+
+      .movie-roulette-header {
+        @include displayFlex;
         border-bottom: 0.01rem solid black;
+        .movie-roulette-title {
+          padding: 1rem;
+          font-size: 2rem;
+          width: 100%;
+          height: 10%;
+        }
+        .movie-roulette-close {
+          padding: 1rem;
+          font-size: 1.8rem;
+          font-weight: bold;
+          background-color: inherit;
+          border: none;
+          &:hover {
+            cursor: pointer;
+          }
+        }
       }
+
       .radio-input {
         width: 1rem;
         height: 1rem;
