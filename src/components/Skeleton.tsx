@@ -1,11 +1,6 @@
 import placeholder from "../assets/placeholder.png";
 
-interface SkeletonProps {
-  type: string;
-  count?: number;
-}
-
-const Skeleton = ({ type, count }: SkeletonProps) => {
+const Skeleton = ({ type, count }: { type: string; count?: number }) => {
   const renderSkeletonItems = () => {
     switch (type) {
       case "movie-list":

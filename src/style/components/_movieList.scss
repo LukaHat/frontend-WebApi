@@ -17,6 +17,13 @@
     .movie-roulette-modal {
       width: 40%;
       height: 70%;
+      @include respond-to(small) {
+        width: 80%;
+      }
+      @include respond-to(small) {
+        width: 40%;
+        height: 70%;
+      }
       background-color: rgb(2, 13, 51);
       color: white;
 
@@ -33,6 +40,7 @@
           padding: 1rem;
           font-size: 1.8rem;
           font-weight: bold;
+          color: white;
           background-color: inherit;
           border: none;
           &:hover {

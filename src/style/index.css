@@ -263,6 +263,17 @@ a {
   background-color: rgb(2, 13, 51);
   color: white;
 }
+@media (min-width: 320px) {
+  .movie-list .movie-roulette-modal-container .movie-roulette-modal {
+    width: 80%;
+  }
+}
+@media (min-width: 320px) {
+  .movie-list .movie-roulette-modal-container .movie-roulette-modal {
+    width: 40%;
+    height: 70%;
+  }
+}
 .movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header {
   display: flex;
   align-items: center;
@@ -279,6 +290,7 @@ a {
   padding: 1rem;
   font-size: 1.8rem;
   font-weight: bold;
+  color: white;
   background-color: inherit;
   border: none;
 }
