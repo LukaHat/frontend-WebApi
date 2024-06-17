@@ -7,6 +7,7 @@ import {
 import { GenreInterface, MovieInterface } from "../types";
 import Movie from "./Movie";
 import { Link, useNavigate } from "react-router-dom";
+import Skeleton from "./Skeleton";
 
 import random from "../assets/random.svg";
 
@@ -18,6 +19,10 @@ export const MovieList = () => {
   const [genres, setGenres] = useState<GenreInterface[]>([]);
   const [selectedGenre, setSelectedGenre] = useState<number>(0);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // Set to keep track of unique movie IDs
+  const uniqueMovieIds = new Set<number>();
 
   useEffect(() => {
     if (selectedGenre !== 0) {
@@ -43,9 +48,21 @@ export const MovieList = () => {
   useEffect(() => {
     const fetchMovieData = async (page: number) => {
       try {
+        setIsLoading(true);
         const resp = await getAllMovies(page);
         console.log(resp);
-        setMovies((prevMovies) => [...prevMovies, ...resp.results]);
+
+        // Filter out duplicates
+        const newMovies = resp.results.filter((movie: MovieInterface) => {
+          if (!uniqueMovieIds.has(movie.id)) {
+            uniqueMovieIds.add(movie.id);
+            return true;
+          }
+          return false;
+        });
+
+        setMovies((prevMovies) => [...prevMovies, ...newMovies]);
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -107,17 +124,21 @@ export const MovieList = () => {
           <img src={random} alt="random" />
         </button>
         <div className="movie-list-movies">
-          {movies.map((movie) => (
-            <Link to={`movie/${movie.id}`} key={movie.id} className="movie">
-              <Movie
-                title={movie.title}
-                language={movie.original_language}
-                vote_avg={movie.vote_average}
-                img={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
-                release_date={movie.release_date}
-              />
-            </Link>
-          ))}
+          {isLoading ? (
+            <Skeleton type="movie-list" count={20 * page} />
+          ) : (
+            movies.map((movie) => (
+              <Link to={`movie/${movie.id}`} key={movie.id} className="movie">
+                <Movie
+                  title={movie.title}
+                  language={movie.original_language}
+                  vote_avg={movie.vote_average}
+                  img={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
+                  release_date={movie.release_date}
+                />
+              </Link>
+            ))
+          )}
         </div>
         {isModalOpen && (
           <div
@@ -134,22 +155,24 @@ export const MovieList = () => {
                   &times;
                 </button>
               </div>
-              <legend>Select genre:</legend>
-              {genres.map((genre) => (
-                <div key={genre.id}>
-                  <input
-                    type="radio"
-                    id={genre.name}
-                    name="genre"
-                    value={genre.id}
-                    className="radio-input"
-                    onChange={(e) => {
-                      setSelectedGenre(Number(e.target.value));
-                    }}
-                  />
-                  <label htmlFor={genre.name}>{genre.name}</label>
-                </div>
-              ))}
+              <legend className="genre-heading">Select genre:</legend>
+              <div className="genre-list">
+                {genres.map((genre) => (
+                  <div key={genre.id} className="radio-input-container">
+                    <input
+                      type="radio"
+                      id={genre.name}
+                      name="genre"
+                      value={genre.id}
+                      className="radio-input"
+                      onChange={(e) => {
+                        setSelectedGenre(Number(e.target.value));
+                      }}
+                    />
+                    <label htmlFor={genre.name}>{genre.name}</label>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}

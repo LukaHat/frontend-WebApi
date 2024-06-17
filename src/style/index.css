@@ -260,14 +260,14 @@ a {
 .movie-list .movie-roulette-modal-container .movie-roulette-modal {
   width: 40%;
   height: 70%;
-  background-color: black;
+  background-color: rgb(2, 13, 51);
   color: white;
 }
 .movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 0.01rem solid black;
+  border-bottom: 0.01rem solid white;
 }
 .movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header .movie-roulette-title {
   padding: 1rem;
@@ -285,12 +285,68 @@ a {
 .movie-list .movie-roulette-modal-container .movie-roulette-modal .movie-roulette-header .movie-roulette-close:hover {
   cursor: pointer;
 }
-.movie-list .movie-roulette-modal-container .movie-roulette-modal .radio-input {
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .genre-heading {
+  font-size: 1.3rem;
+  padding: 1rem;
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .genre-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 1rem;
+  align-items: start;
+  gap: 0.3rem;
+}
+@keyframes expand-circle {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 3rem;
+    height: 3rem;
+    opacity: 0;
+  }
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .genre-list .radio-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .genre-list .radio-input {
+  position: relative;
+  appearance: none;
   width: 1rem;
   height: 1rem;
-  color: black;
-  z-index: 20;
-  appearance: auto;
+  background-color: #fff;
+  border: 0.1rem solid #007bff;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.6s ease, border-color 0.6s ease;
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .genre-list .radio-input:checked {
+  background-color: rgb(0, 215, 219);
+  border-color: rgb(0, 215, 219);
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .genre-list .radio-input:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background-color: rgba(0, 215, 219, 0.5);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: expand-circle 0.5s ease-out;
+}
+.movie-list .movie-roulette-modal-container .movie-roulette-modal .genre-list .radio-input:hover {
+  border-color: #4200db;
 }
 .movie-list .movie-list-movies {
   padding: 2rem 0;
@@ -450,6 +506,209 @@ a {
 }
 .movie-detail .movie-detail-more-info .bold {
   font-weight: bold;
+}
+
+@keyframes skeletonAnimation {
+  0%, 100% {
+    background-color: lightgray;
+    opacity: 0.2;
+  }
+  50% {
+    background-color: darkgray;
+    opacity: 1;
+  }
+}
+.movie.skeleton {
+  cursor: pointer;
+}
+
+.movie.skeleton {
+  width: 26vw;
+  height: 50vh;
+  animation: skeletonAnimation 3s infinite reverse ease-in-out;
+  padding: 10px;
+  border-radius: 0.5rem;
+  place-self: center;
+  color: white;
+  transition: 300ms;
+}
+@media (min-width: 320px) {
+  .movie.skeleton {
+    width: 75vw;
+    height: 40vh;
+  }
+}
+@media (min-width: 768px) {
+  .movie.skeleton {
+    width: 30vw;
+  }
+}
+@media (min-width: 1024px) {
+  .movie.skeleton {
+    width: 26vw;
+    height: 50vh;
+  }
+}
+.movie.skeleton:hover {
+  scale: 1.1;
+}
+.movie.skeleton .movie-link.skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+.movie.skeleton .movie-link.skeleton .movie-img-container.skeleton {
+  position: relative;
+  width: 100%;
+  height: auto !important;
+}
+.movie.skeleton .movie-link.skeleton .movie-img-container.skeleton .movie-image.skeleton {
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+}
+.movie.skeleton .movie-link.skeleton .movie-img-container.skeleton .movie-rating.skeleton {
+  font-size: 1.3rem;
+  position: absolute;
+  top: -2.5rem;
+  right: -3rem;
+  color: rgb(3, 4, 94);
+  background-color: gray;
+  padding: 2rem;
+  border-radius: 100%;
+  border: 0.01rem solid rgb(3, 4, 94);
+  clip-path: polygon(50% 0%, 68% 30%, 98% 35%, 77% 56%, 79% 91%, 50% 70%, 21% 91%, 23% 55%, 2% 35%, 33% 31%);
+}
+@media (min-width: 320px) {
+  .movie.skeleton .movie-link.skeleton .movie-img-container.skeleton .movie-rating.skeleton {
+    padding: 1.5rem;
+    top: -2rem;
+    right: -2rem;
+  }
+}
+@media (min-width: 768px) {
+  .movie.skeleton .movie-link.skeleton .movie-img-container.skeleton .movie-rating.skeleton {
+    padding: 1.6rem;
+    top: -2.1rem;
+    right: -2.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .movie.skeleton .movie-link.skeleton .movie-img-container.skeleton .movie-rating.skeleton {
+    top: -2.4rem;
+    right: -2rem;
+    padding: 1.8rem;
+  }
+}
+.movie.skeleton .movie-link.skeleton .movie-title.skeleton {
+  width: 100%;
+  background-color: gray;
+  font-size: 1.6rem;
+}
+.movie.skeleton .movie-link.skeleton .movie-language.skeleton {
+  width: 50%;
+  background-color: gray;
+  font-size: 1.5rem;
+  align-self: flex-start;
+}
+
+.movie-detail.skeleton {
+  animation: skeletonAnimation 3s infinite reverse ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: start;
+  padding: 0 10%;
+  gap: 2rem;
+}
+.movie-detail.skeleton .movie-detail-title {
+  background-color: gray;
+  width: 50%;
+  height: 2vh;
+  padding-top: 3rem;
+}
+.movie-detail.skeleton .movie-detail-img-container.skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  align-items: start;
+  position: relative;
+}
+.movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-img.skeleton {
+  width: 60vw;
+  height: auto;
+}
+@media (min-width: 320px) {
+  .movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-img.skeleton {
+    width: 100vw;
+  }
+}
+@media (min-width: 768px) {
+  .movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-img.skeleton {
+    width: 80vw;
+  }
+}
+@media (min-width: 1024px) {
+  .movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-img.skeleton {
+    width: 60vw;
+  }
+}
+.movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-description.skeleton {
+  position: absolute;
+  width: 60%;
+  background-color: gray !important;
+  top: 80%;
+  height: 20%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: white;
+}
+@media (min-width: 320px) {
+  .movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-description.skeleton {
+    color: white;
+    width: 100%;
+    background: black;
+    box-shadow: none;
+    position: relative;
+  }
+}
+@media (min-width: 768px) {
+  .movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-description.skeleton {
+    color: white;
+    width: 100%;
+    background: black;
+    box-shadow: none;
+    position: relative;
+  }
+}
+@media (min-width: 1024px) {
+  .movie-detail.skeleton .movie-detail-img-container.skeleton .movie-detail-description.skeleton {
+    position: absolute;
+    width: 60%;
+    top: 80%;
+    height: 20%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    background: transparent;
+    color: white;
+  }
+}
+.movie-detail.skeleton .movie-detail-more-info.skeleton {
+  width: 50%;
+  background-color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: start;
+  font-size: 1.3rem;
+  padding-bottom: 5rem;
 }
 
 /*# sourceMappingURL=index.css.map */

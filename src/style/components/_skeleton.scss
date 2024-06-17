@@ -1,0 +1,196 @@
+@use "../abstracts/" as *;
+@keyframes skeletonAnimation {
+  0%,
+  100% {
+    background-color: lightgray;
+    opacity: 0.2;
+  }
+  50% {
+    background-color: darkgray;
+    opacity: 1;
+  }
+}
+
+.movie.skeleton {
+  cursor: pointer;
+}
+
+.movie.skeleton {
+  width: 26vw;
+  height: 50vh;
+  animation: skeletonAnimation 3s infinite reverse ease-in-out;
+
+  @include respond-to(small) {
+    width: 75vw;
+    height: 40vh;
+  }
+  @include respond-to(medium) {
+    width: 30vw;
+  }
+  @include respond-to(large) {
+    width: 26vw;
+    height: 50vh;
+  }
+
+  padding: 10px;
+  border-radius: 0.5rem;
+  place-self: center;
+  color: white;
+  transition: 300ms;
+
+  &:hover {
+    scale: 1.1;
+  }
+
+  .movie-link.skeleton {
+    @include displayFlexCol;
+    gap: 2rem;
+
+    .movie-img-container.skeleton {
+      position: relative;
+      width: 100%;
+      height: auto !important;
+
+      .movie-image.skeleton {
+        width: 100%;
+        height: auto;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .movie-rating.skeleton {
+        font-size: 1.3rem;
+        position: absolute;
+        top: -2.5rem;
+        right: -3rem;
+        color: $navy;
+        background-color: gray;
+        padding: 2rem;
+        border-radius: 100%;
+        border: 0.01rem solid $navy;
+        clip-path: polygon(
+          50% 0%,
+          68% 30%,
+          98% 35%,
+          77% 56%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          23% 55%,
+          2% 35%,
+          33% 31%
+        );
+
+        @include respond-to(small) {
+          padding: 1.5rem;
+          top: -2rem;
+          right: -2rem;
+        }
+        @include respond-to(medium) {
+          padding: 1.6rem;
+          top: -2.1rem;
+          right: -2.5rem;
+        }
+        @include respond-to(large) {
+          top: -2.4rem;
+          right: -2rem;
+          padding: 1.8rem;
+        }
+      }
+    }
+
+    .movie-title.skeleton {
+      width: 100%;
+      background-color: gray;
+      font-size: 1.6rem;
+    }
+    .movie-language.skeleton {
+      width: 50%;
+      background-color: gray;
+      font-size: 1.5rem;
+      align-self: flex-start;
+    }
+  }
+}
+
+.movie-detail.skeleton {
+  animation: skeletonAnimation 3s infinite reverse ease-in-out;
+  @include displayFlexCol;
+  align-items: start;
+  padding: 0 10%;
+  gap: 2rem;
+
+  .movie-detail-title {
+    background-color: gray;
+    width: 50%;
+    height: 2vh;
+    padding-top: 3rem;
+  }
+
+  .movie-detail-img-container.skeleton {
+    @include displayFlexCol;
+    align-items: start;
+    position: relative;
+
+    .movie-detail-img.skeleton {
+      width: 60vw;
+
+      @include respond-to(small) {
+        width: 100vw;
+      }
+      @include respond-to(medium) {
+        width: 80vw;
+      }
+      @include respond-to(large) {
+        width: 60vw;
+      }
+      height: auto;
+    }
+
+    .movie-detail-description.skeleton {
+      position: absolute;
+      width: 60%;
+      background-color: gray !important;
+      top: 80%;
+      height: 20%;
+      padding: 1rem;
+      font-size: 1.2rem;
+      color: white;
+
+      @include respond-to(small) {
+        color: white;
+        width: 100%;
+        background: black;
+        box-shadow: none;
+        position: relative;
+      }
+      @include respond-to(medium) {
+        color: white;
+        width: 100%;
+        background: black;
+        box-shadow: none;
+        position: relative;
+      }
+      @include respond-to(large) {
+        position: absolute;
+        width: 60%;
+        top: 80%;
+        height: 20%;
+        padding: 1rem;
+        font-size: 1.2rem;
+        background: transparent;
+        color: white;
+      }
+    }
+  }
+
+  .movie-detail-more-info.skeleton {
+    width: 50%;
+    background-color: gray;
+    @include displayFlexCol;
+    gap: 0.8rem;
+    align-items: start;
+    font-size: 1.3rem;
+    padding-bottom: 5rem;
+  }
+}

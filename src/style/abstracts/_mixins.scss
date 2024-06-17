@@ -11,6 +11,13 @@
   flex-direction: column;
 }
 
+@mixin displayFlexRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
 @mixin displayFlexBetweenCol {
   display: flex;
   align-items: center;

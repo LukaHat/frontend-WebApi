@@ -17,12 +17,12 @@
     .movie-roulette-modal {
       width: 40%;
       height: 70%;
-      background-color: black;
+      background-color: rgb(2, 13, 51);
       color: white;
 
       .movie-roulette-header {
         @include displayFlex;
-        border-bottom: 0.01rem solid black;
+        border-bottom: 0.01rem solid white;
         .movie-roulette-title {
           padding: 1rem;
           font-size: 2rem;
@@ -40,13 +40,66 @@
           }
         }
       }
+      .genre-heading {
+        font-size: 1.3rem;
+        padding: 1rem;
+      }
+      .genre-list {
+        @include displayFlexCol;
+        padding-left: 1rem;
+        align-items: start;
+        gap: 0.3rem;
 
-      .radio-input {
-        width: 1rem;
-        height: 1rem;
-        color: black;
-        z-index: 20;
-        appearance: auto;
+        @keyframes expand-circle {
+          0% {
+            width: 0;
+            height: 0;
+            opacity: 1;
+          }
+          100% {
+            width: 3rem;
+            height: 3rem;
+            opacity: 0;
+          }
+        }
+        .radio-input-container {
+          @include displayFlexRow;
+          gap: 0.5rem;
+        }
+        .radio-input {
+          position: relative;
+          appearance: none;
+          width: 1rem;
+          height: 1rem;
+          background-color: #fff;
+          border: 0.1rem solid #007bff;
+          border-radius: 50%;
+          cursor: pointer;
+          outline: none;
+          transition: background-color 0.6s ease, border-color 0.6s ease;
+
+          &:checked {
+            background-color: rgba(0, 215, 219, 1);
+            border-color: rgba(0, 215, 219, 1);
+
+            &::after {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              width: 0;
+              height: 0;
+              background-color: rgba(0, 215, 219, 0.5);
+              border-radius: 50%;
+              transform: translate(-50%, -50%);
+              animation: expand-circle 0.5s ease-out;
+            }
+          }
+
+          &:hover {
+            border-color: #4200db;
+          }
+        }
       }
     }
   }
