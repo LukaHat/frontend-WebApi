@@ -1,4 +1,4 @@
-import { getAll, getById } from "./base";
+import { getAll, getById, post } from "./base";
 
 const getAllMovies = async (page: number) => {
   try {
@@ -47,4 +47,32 @@ const getAllGenres = async () => {
   }
 };
 
-export { getAllMovies, getMovieById, getAllGenres, getAllMoviesFromGenre };
+const getAccountMovieDetails = async (id: number) => {
+  try {
+    const resp = await getById("/movie/", id, "/account_states");
+    const data = resp?.data;
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const addRating = async (id: number, value: string) => {
+  try {
+    const resp = await post("/movie/", id, "/rating", value);
+    console.log(resp);
+    return resp;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export {
+  getAllMovies,
+  getMovieById,
+  getAllGenres,
+  getAllMoviesFromGenre,
+  getAccountMovieDetails,
+  addRating,
+};

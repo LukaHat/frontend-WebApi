@@ -519,6 +519,14 @@ a {
 .movie-detail .movie-detail-more-info .bold {
   font-weight: bold;
 }
+.movie-detail .movie-detail-rating {
+  width: 40vw;
+  height: 20vh;
+}
+.movie-detail .movie-detail-rating img {
+  width: 5vw;
+  height: auto;
+}
 
 @keyframes skeletonAnimation {
   0%, 100% {

@@ -19,9 +19,9 @@ const getAll = async (url: string) => {
   }
 };
 
-const getById = async (url: string, id: number) => {
+const getById = async (url: string, id: number, secondUrl?: string) => {
   try {
-    const resp = await axios.get(`${BASE_URL}${url}/${id}`, config);
+    const resp = await axios.get(`${BASE_URL}${url}/${id}${secondUrl}`, config);
     console.log(resp);
     return resp;
   } catch (error) {
@@ -29,4 +29,23 @@ const getById = async (url: string, id: number) => {
   }
 };
 
-export { getAll, getById };
+const post = async (
+  url: string,
+  id: number,
+  secondUrl: string,
+  value: string
+) => {
+  try {
+    const resp = await axios.post(
+      `${BASE_URL}${url}/${id}${secondUrl}`,
+      { value },
+      config
+    );
+    console.log(resp);
+    return resp;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { getAll, getById, post };

@@ -1,25 +1,44 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieById } from "../api/movie";
+import { getMovieById, getAccountMovieDetails, addRating } from "../api/movie";
 import { MovieDetailInterface } from "../types";
 import Skeleton from "./Skeleton";
+import { Rating, Star } from "@smastrom/react-rating";
+
+import "@smastrom/react-rating/style.css";
 
 const MovieDetail = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
 
   const [movieDetail, setMovieDetail] = useState<MovieDetailInterface | null>(
     null
   );
   const [releaseYear, setReleaseYear] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [rating, setRating] = useState<number>(0);
+  const [isRated, setIsRated] = useState<boolean>(false);
+
+  const ratingStyle = {
+    itemShapes: Star,
+    activeFillColor: "#ebc934",
+    inactiveFillColor: "#000",
+  };
 
   useEffect(() => {
     const fetchData = async (id: number) => {
       try {
         setIsLoading(true);
         const resp = await getMovieById(id);
+        const resp1 = await getAccountMovieDetails(id);
+        if (resp1.rated !== false) {
+          setIsRated(true);
+          setRating(resp1.rated.value);
+        } else {
+          setIsRated(false);
+        }
         if (resp) {
           console.log(resp);
+          console.log(resp1);
           setMovieDetail({
             id: resp.id,
             img: resp.backdrop_path,
@@ -51,6 +70,20 @@ const MovieDetail = () => {
 
     fetchData(Number(id));
   }, [id, releaseYear]);
+
+  const handleRating = async (rating: number) => {
+    try {
+      const resp = await addRating(Number(id), String(rating));
+      const resp1 = await getAccountMovieDetails(Number(id));
+      console.log(resp);
+      console.log(resp1);
+      setRating(resp1.rated.value);
+      console.log(rating);
+      return resp;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -90,6 +123,23 @@ const MovieDetail = () => {
               <span className="bold">Production companies:</span>{" "}
               {movieDetail?.productionCompanies?.join(", ")}
             </p>
+          </div>
+          <div className="movie-detail-rating">
+            {isRated ? (
+              <Rating
+                readOnly
+                value={rating}
+                items={10}
+                itemStyles={ratingStyle}
+              />
+            ) : (
+              <Rating
+                value={rating}
+                onChange={handleRating}
+                items={10}
+                itemStyles={ratingStyle}
+              />
+            )}
           </div>
         </div>
       )}
